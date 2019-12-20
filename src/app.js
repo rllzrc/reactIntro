@@ -28,31 +28,54 @@ import React from 'react';
 // similar to destructuring, helps you be more explicit
 // remove React-Dom from below and just leave as render
 import { render } from 'react-dom'
-import Pet from './Pet';
+//import Pet from './Pet';
+import SearchParams from './SearchParams';
 
 const App = () => {
-  return React.createElement(
-    "div",
-    { id: "something-important"},
+
+  // * using regular react/JS WITHOUT JSX
+  // return React.createElement(
+  //   "div",
+  //   { id: "something-important"},
     
-    [
-      React.createElement("h1", {}, "Adopt Me!"),
-      React.createElement(Pet, { 
-        name: "Datlon", 
-        animal: "Dog", 
-        breed: "Shihtzu"
-      }), 
-      React.createElement(Pet, { 
-        name: "Oreo", 
-        animal: "Dog", 
-        breed: "Maltese Mix"
-      }),
-      React.createElement(Pet, { 
-        name: "Kurt", 
-        animal: "Cat", 
-        breed: "Mixed"
-      })
-    ]);
+  //   [
+  //     React.createElement("h1", {}, "Adopt Me!"),
+  //     React.createElement(Pet, { 
+  //       name: "Datlon", 
+  //       animal: "Dog", 
+  //       breed: "Shihtzu"
+  //     }), 
+  //     React.createElement(Pet, { 
+  //       name: "Oreo", 
+  //       animal: "Dog", 
+  //       breed: "Maltese Mix"
+  //     }),
+  //     React.createElement(Pet, { 
+  //       name: "Kurt", 
+  //       animal: "Cat", 
+  //       breed: "Mixed"
+  //     })
+  //   ]);
+
+  // * after import of React, using JSX attributes
+  // return (
+  //   <div>
+  //     <h1 id="something-important">Adopt Me!</h1>
+  //     <Pet name="Dalton" animal="Dog" breed="Shihtzu" />
+  //     <Pet name="Oreo" animal="Dog" breed="Maltese Mix" />
+  //     <Pet name="Kurt" animal="Cat" breed="Mixed" />
+  //   </div>
+  // );
+
+  // * with utilizing hooks/creating a search component
+  return (
+    <div>
+      <h1 id="something-important">Adopt Me!!</h1>
+      <SearchParams />
+    </div>
+  );
+
+
 };
 
 // * since import took place, no need to reference ReactDOM.render
@@ -61,4 +84,7 @@ const App = () => {
 //   document.getElementById('root')
 // );
 
-render(React.createElement(App), document.getElementById('root'));
+// * before wrapping App
+// render(React.createElement(App), document.getElementById('root'));
+
+render(<App />, document.getElementById("root"));
