@@ -31,6 +31,8 @@ import { render } from 'react-dom'
 //import Pet from './Pet';
 import SearchParams from './SearchParams';
 
+import { Router } from '@reach/router';
+import Details from './Details';
 const App = () => {
 
   // * using regular react/JS WITHOUT JSX
@@ -70,8 +72,13 @@ const App = () => {
   // * with utilizing hooks/creating a search component
   return (
     <div>
-      <h1 id="something-important">Adopt Me!!</h1>
-      <SearchParams />
+      <header>
+        <Link to='/'>Adopt Me!</Link>
+      </header>
+      <Router>
+        <SearchParams path='/' />
+        <Details path='/details/:id' />
+      </Router>
     </div>
   );
 

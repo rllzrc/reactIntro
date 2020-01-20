@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import pet, { ANIMALS } from '@frontendmasters/pet';
 
+import Results from './Results';
+
 import useDropdown from './useDropdown';
 
 // * useEffect addition --> going to take the place of several lifecycle hooks --> takes place of componentDidMount, componentWillUnmount, and componentDidUpdate
@@ -33,7 +35,7 @@ const SearchParams = () => {
 
   // * this is SUPPLANTING the need for set stte for these function components --> way to do state with hooks ~ ***
   const [location, setLocation] = useState("Seattle, WA");
-
+ˀ
   // * generalized via the useDropdown component
   // const [animal, setAnimal] = useState("dog");
 
@@ -43,11 +45,50 @@ const SearchParams = () => {
 
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
 
-  const [breed, BreedDropdown] = useDropdown("Breed", "", breeds);
+  const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
+
+  const [pets, setPets] = useState([]);
+
+  // * always returns a promise that will resolve upon function completion 
+  // * await --> signals wait for all of this stuff to finish and then give me back that data
+  async function requestPets(){
+    const { animals } = await pet.animals({
+      location,
+      breed,
+      type: animal
+    });
+
+    setPets(animals || []);
+  }
+
+  // * disconnected from render happens
+  // * scheduling this function to run after the render happens
+  // does not happen immediately, as soon as searchParams renders the first time then it will run useEffect
+  // * WHY?!?!?! you don't want to slow down the first render
+  // * you wanna immediately show something and then send req to API, Front End Optimization logic...
+
+  // * line 62 is the same as const breedStrings = breeds.map((breedObj) => breedObj.name);
+
+  // * line 65 --> when invoking useEffect, must list all of its dependencies bc it will be invoked every time render is called so by declaring its dependencies it will ONLY run when these dependencies change 
+
+  useEffect(() => {
+    //pet.breeds("dog").then(console.log, console.error);
+    setBreeds([]);
+    setBreed("");
+
+    pet.breeds(animal).then(({ breeds: apiBreeds }) =>{
+      const breedStrings = apiBreeds.map(({ name }) => name);
+      setBreeds(breedStrings);
+    }, console.error);
+  }, [animal, setBreed, setBreeds]);
 
   return (
     <div className="search-params">
-      <form>
+      <form 
+        onSubmit={event => {
+        event.preventDefault();
+        requestPets();
+      }}>
         <label htmlFor="location">
           Location
           <input id="location" 
@@ -59,6 +100,7 @@ const SearchParams = () => {
         <BreedDropdown />
         <button>Submit</button>
       </form>
+      <Results pets={pets} />
     </div>
   );
 };
