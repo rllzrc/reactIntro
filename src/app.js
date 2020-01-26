@@ -29,7 +29,13 @@ import React from 'react';
 // remove React-Dom from below and just leave as render
 import { render } from 'react-dom'
 //import Pet from './Pet';
+
+// * import router
+import { Router, Link } from '@reach/router';
+
 import SearchParams from './SearchParams';
+
+import Details from './Details';
 
 const App = () => {
 
@@ -70,8 +76,13 @@ const App = () => {
   // * with utilizing hooks/creating a search component
   return (
     <div>
-      <h1 id="something-important">Adopt Me!!</h1>
-      <SearchParams />
+      <header>
+      <Link to='/'>Adopt Me!!</Link>
+      </header>
+      <Router>
+        <SearchParams path='/' />
+        <Details path='/details/:id'/>
+      </Router>
     </div>
   );
 
