@@ -12,50 +12,41 @@ import { Link } from '@reach/router';
 // * changed to:
 // * useful for debugging so stack trace to find that pet has the error
 // * default export for components is always the component
-
-
-const Pet = props => {
-  const { name, animal, breed, media, location, id } = props;
+export default function Pet ({ name, animal, breed, media, location, id }) {
 
   let hero = 'http://placecorgi.com/300/300';
-  if(media.length) {
+  if(media.length){
     hero = media[0].small;
   }
 
+  // * using pure React without JSX
+    // return React.createElement("div", {}, [
+    //   React.createElement("h1", {}, name),
+    //   React.createElement("h2", {}, animal),
+    //   React.createElement("h2", {}, breed)
+    // ]);
+  
+    // * using JSX syntax
+    // * basically just the shorter version of the above
   return (
-    <Link to={`/details/${id}`} className='pet'>
-      <div className='image-container'>
+    <a href={`/details/${id}`} className="pet">
+      <div className="image-container">
         <img src={hero} alt={name} />
       </div>
-      <div className='info'>
+      <div className="info">
         <h1>{name}</h1>
-        <h2>{`${animal} - ${breed} - ${location}`}</h2>
+        <h2>{`${animal} - ${breed} - ${location} `}</h2>
       </div>
-    </Link>
+    </a>
   );
-};
+}
 
 
-
-
-
-
-// export default function Pet ({ name, animal, breed }) {
-
-//   // * using pure React without JSX
-//     // return React.createElement("div", {}, [
-//     //   React.createElement("h1", {}, name),
-//     //   React.createElement("h2", {}, animal),
-//     //   React.createElement("h2", {}, breed)
-//     // ]);
-  
-//     // * using JSX syntax
-//     // * basically just the shorter version of the above
-//   return (
-//     <div>
-//       <h1>{name}</h1>
-//       <h2>{animal}</h2>
-//       <h2>{breed}</h2>
-//     </div>
-//   );
-// }
+// * used to be this one:
+// return (
+//   <div>
+//     <h1>{name}</h1>
+//     <h2>{animal}</h2>
+//     <h2>{breed}</h2>
+//   </div>
+// );
