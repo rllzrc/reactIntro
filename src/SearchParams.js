@@ -4,6 +4,8 @@ import pet, { ANIMALS } from '@frontendmasters/pet';
 
 import Results from './Results';
 
+import ThemeContext from './ThemeContext';
+
 import useDropdown from './useDropdown';
 
 // * useEffect addition --> going to take the place of several lifecycle hooks --> takes place of componentDidMount, componentWillUnmount, and componentDidUpdate
@@ -98,7 +100,20 @@ const SearchParams = () => {
         </label>
         <AnimalDropdown />
         <BreedDropdown />
-        <button>Submit</button>
+        <label htmlFor='location'>
+          Theme
+          <select 
+            value={theme}
+            onChange={e => setTheme(e.target.value)}
+            onBlur={e => setTheme(e.target.value)}
+          >
+            <option value='peru'>Peru</option>
+            <option value='darkblue'>Dark Blue</option>
+            <option value='chartreuse'>Chartreuse</option>
+            <option value='mediumorchid'>Medium Orchid</option>
+          </select>
+        </label>
+        <button style={{ backgroundColor: theme }}>Submit</button>
       </form>
       <Results pets={pets} />
     </div>
