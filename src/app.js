@@ -37,6 +37,15 @@ import SearchParams from './SearchParams';
 
 import Details from './Details';
 
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Link } from '@reach/router';
+import Details from './Details';
+import SearchParams from './SearchParams';
+import ThemeContext from './ThemeContext';
+
+
+
 const App = () => {
 
   // * using regular react/JS WITHOUT JSX
@@ -73,17 +82,30 @@ const App = () => {
   //   </div>
   // );
 
+  const theme = useState('darkblue');
+
   // * with utilizing hooks/creating a search component
   return (
-    <div>
-      <header>
-      <Link to='/'>Adopt Me!!</Link>
-      </header>
-      <Router>
-        <SearchParams path='/' />
-        <Details path='/details/:id'/>
-      </Router>
-    </div>
+    // <div>
+    //   <header>
+    //   <Link to='/'>Adopt Me!!</Link>
+    //   </header>
+    //   <Router>
+    //     <SearchParams path='/' />
+    //     <Details path='/details/:id'/>
+    //   </Router>
+    // </div>
+    <ThemeContext.Provider value={theme}>
+      <div>
+        <header>
+          <Link to='/'>Adopt Me!</Link>
+        </header>
+        <Router>
+          <SearchParams path='/' />
+          <Details path='/details/:id' />
+        </Router>
+      </div>
+    </ThemeContext.Provider>
   );
 
 
@@ -98,4 +120,4 @@ const App = () => {
 // * before wrapping App
 // render(React.createElement(App), document.getElementById('root'));
 
-render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
