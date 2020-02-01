@@ -3,11 +3,12 @@
 import React from 'react';
 import { Link } from '@react/router';
 import { css } from '@emotion/core';
+import colors from './colors';
 
 const NavBar = () => (
   <header
     css={css`
-      background-color: #333;
+      background-color: ${colors.dark};
       position: sticky,
       top: 0;
       z-index: 10;
@@ -23,3 +24,10 @@ const NavBar = () => (
 
 // * emotion has other ways of interacting with it (generating components) but here we're using the new css prop way of doing it. 
 // * css prop allows us to use the css tagged template literal to write CSS.
+
+const NavLink = styled(Link)`
+  &:hover {
+    text-decoration: underline;
+  }
+  `;
+
