@@ -97,9 +97,9 @@ const App = () => {
     // </div>
     <ThemeContext.Provider value={theme}>
       <div>
-        <header>
+        <NavBar>
           <Link to='/'>Adopt Me!</Link>
-        </header>
+        </NavBar>
         <Router>
           <SearchParams path='/' />
           <Details path='/details/:id' />

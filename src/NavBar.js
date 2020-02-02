@@ -14,7 +14,14 @@ const NavBar = () => (
       z-index: 10;
     `}
   >
-  
+  <Link
+    css={css`
+      &:hover {
+        text-decoration: underline;
+      }
+    `}
+      to='/'
+  ></Link>
   <Link to='/'>Adopt Me!</Link>
   <span arial-label='logo' role='img'>
     🐶
