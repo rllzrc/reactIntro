@@ -4,6 +4,13 @@ import React from 'react';
 import { Link } from '@react/router';
 import { css } from '@emotion/core';
 import colors from './colors';
+import { css, keyframes } from 'react-emotion';
+
+const Spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+  `;
 
 const NavBar = () => (
   <header
@@ -20,10 +27,15 @@ const NavBar = () => (
         text-decoration: underline;
       }
     `}
-      to='/'
-  ></Link>
-  <Link to='/'>Adopt Me!</Link>
-  <span arial-label='logo' role='img'>
+    to='/'>Adopt Me!</Link>
+  <span 
+    css={css`
+      display: inline-block;
+      animation: 1s ${Spin} linear infinite;
+      font-size: 60px;
+    `}
+    aria-label='logo'
+    role='img'>
     🐶
   </span>
   </header>
