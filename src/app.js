@@ -37,14 +37,17 @@ import SearchParams from './SearchParams';
 
 import Details from './Details';
 
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Link } from '@reach/router';
-import Details from './Details';
-import SearchParams from './SearchParams';
+//import Details from './Details';
+//import SearchParams from './SearchParams';
 import ThemeContext from './ThemeContext';
 
+// * code splitting is essential to having small app sizes, particularly w React. 30kb framework. slow initial page load plus third partly libraries on top...yowza enter code split!
 
+const Details = lazy(() => import('./Details'));
+const SearchParams = lazy(() => import('./SearchParams'));
 
 const App = () => {
 
