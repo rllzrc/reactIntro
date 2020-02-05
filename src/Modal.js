@@ -1,10 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-const modalRoot = document.getElementById('modal');
+//const modalRoot = document.getElementById('modal');
+// switched to sever side rendering
+
+let modalRoot; 
 
 const Modal = ({ children }) => {
   const elRef = useRef(null);
+  modalRoot = modalRoot ? modalRoot : document.getElementById('modal');
+  
   if(!elRef.current) {
     elRef.current = document.createElement('div');
   }

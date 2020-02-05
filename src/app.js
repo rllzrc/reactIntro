@@ -38,7 +38,7 @@ import SearchParams from './SearchParams';
 import Details from './Details';
 
 import React, { useState, lazy, Suspense } from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import { Router, Link } from '@reach/router';
 //import Details from './Details';
 //import SearchParams from './SearchParams';
@@ -125,4 +125,6 @@ const App = () => {
 // * before wrapping App
 // render(React.createElement(App), document.getElementById('root'));
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+export default App;
