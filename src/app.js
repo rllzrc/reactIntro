@@ -103,10 +103,12 @@ const App = () => {
         <NavBar>
           <Link to='/'>Adopt Me!</Link>
         </NavBar>
+        <Suspense fallback={<h1>loading route...</h1>}>
         <Router>
           <SearchParams path='/' />
           <Details path='/details/:id' />
         </Router>
+        </Suspense>
       </div>
     </ThemeContext.Provider>
   );

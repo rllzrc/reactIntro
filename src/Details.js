@@ -4,7 +4,10 @@ import Carousel from './Carousel';
 import ErrorBoundary from './ErrorBoundary';
 import ThemeContext from './ThemeContext';
 import { navigate } from './Carousel';
-import Modal from './Modal';
+//import Modal from './Modal';
+// * remove modal and replace w suspense 
+
+const Modal = lazy(() => import('./Modal'));
 // const Details = () => {
 //   return <h1>hi lulz</h1>
 // };
