@@ -1,6 +1,7 @@
 import express from 'express';
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+//import { renderToString } from 'react-dom/server';
+import { renderToNodeStream } from 'react-dom/server';
 import { ServerLocation } from '@reach/router';
 import fs from 'fs';
 import App from '../src/App';
@@ -15,12 +16,37 @@ const app = express();
 
 app.use('/dist', express.static('dist'));
 
+// app.use((req, res) => {
+//   const reactMarkup = (
+//     <ServerLocation url={req.url}>
+//       <App />
+//     </ServerLocation>
+//   );
+
+// * send HTTP reqs in chunks = called streaming your request
+// * to send partially rendered bits to client so browser can immediately start processing HTML rather than a big payload at the end. 
+// * WINNER WINNER CHICKEN DINNER = browswer can immediately start downloading CSS while rendering app
+
 app.use((req, res) => {
+  res.write(parts[0]);
   const reactMarkup = (
-    <ServerLocation url={req.url}>
+    <ServerLq url ={req.url}>
       <App />
-    </ServerLocation>
+    </ServerLq>
   );
+
+  const stream = renderToNodeStream(reactMarkup);
+  stream.pipe(
+    res,
+    { end: false }
+  );
+  stream.on('end', () => {
+    res.write(parts[1]);
+    res.end();
+  });
+
+  // * node native type = stream
+  // * stream = similar to bash stream => stream of data that can be piped into something else! --> react markup to be rendered
 
   res.send(`${parts[0]}${renderToString(reactMarkup)}${parts[1]}`);
   res.end();
