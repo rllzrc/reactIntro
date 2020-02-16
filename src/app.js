@@ -37,12 +37,17 @@ import SearchParams from './SearchParams';
 
 import Details from './Details';
 
-import React, { useState, lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
+// remove useState import when added redux
 //import ReactDOM from 'react-dom';
 import { Router, Link } from '@reach/router';
 //import Details from './Details';
 //import SearchParams from './SearchParams';
-import ThemeContext from './ThemeContext';
+//import ThemeContext from './ThemeContext';
+
+// * add redux
+import { Provider } from 'react-redux';
+import store from './store';
 
 // * code splitting is essential to having small app sizes, particularly w React. 30kb framework. slow initial page load plus third partly libraries on top...yowza enter code split!
 
@@ -85,7 +90,8 @@ const App = () => {
   //   </div>
   // );
 
-  const theme = useState('darkblue');
+  // remove useState call when added redux
+  //const theme = useState('darkblue');
 
   // * with utilizing hooks/creating a search component
   return (
@@ -124,7 +130,7 @@ const App = () => {
 
 // * before wrapping App
 // render(React.createElement(App), document.getElementById('root'));
-
+//ReactDOM.rednder(<Provider store={store}>[...]</Provider>);
 // ReactDOM.render(<App />, document.getElementById("root"));
 
 export default App;
