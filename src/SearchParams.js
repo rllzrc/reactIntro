@@ -8,6 +8,10 @@ import ThemeContext from './ThemeContext';
 
 import useDropdown from './useDropdown';
 
+// * replace ThemeContext import now that redux is installedˀ
+
+import { connect } from 'react-redux';
+
 // * useEffect addition --> going to take the place of several lifecycle hooks --> takes place of componentDidMount, componentWillUnmount, and componentDidUpdate
 
 // * added { useState } to be imported from React as well
@@ -155,5 +159,21 @@ const SearchParams = () => {
           </select>
         </label> */
 
-export default SearchParams;
+//export default SearchParams;
 
+// const mapStateToProps = ({ theme, location }) => ({
+//   theme,
+//   location
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//   setLocation(location) {
+//     dispatch(changeLocation(location));
+//   },
+//   setTheme(theme){
+//     dispatch(changeTheme(theme));
+//   }
+// });
+
+
+export default connect(mapStateToProps)(SearchParams);
