@@ -7,6 +7,9 @@ import { navigate } from './Carousel';
 //import Modal from './Modal';
 // * remove modal and replace w suspense 
 
+// * import connect when added redux
+import { connect } from 'react-redux';
+
 const Modal = lazy(() => import('./Modal'));
 // const Details = () => {
 //   return <h1>hi lulz</h1>
@@ -92,6 +95,15 @@ class Details extends React.Component {
 
   }
 }
+
+// * remove all themeContext stuff & interior func --> replace context.theme w this.props.theme for background color
+
+// const mapStateToProps = ({ theme }) => ({ theme });
+
+// const WrappedDetails = connect(mapStateToProps)(Details);
+
+// * replace <Details />
+{/* <WrappedDetails {...props} /> */}
 
 export default Details;
 export default function DetailsErrorBoundary(props){
